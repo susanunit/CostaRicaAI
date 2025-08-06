@@ -1,21 +1,28 @@
 site_name: Costa Rica AI Workshop 2025
+
 theme:
   name: readthedocs
   highlightjs: true
+  #  logo: /imgs/tacc-logo-with-words.svg
+
+
+#extra_css:
+#  - css/extra.css
+
+
 plugins:
   - search
-  - admonition
 
-  ## - mkdocstrings:
-      ## handlers:
-        # See: https://mkdocstrings.github.io/python/usage/
-        ## python:
-          ## options:
-            ## docstring_style: sphinx
 
 markdown_extensions:
-  ##- markdown_include.include:
-  ##    base_path: .
+  - extra
+  - admonition
+  - toc:
+      permalink: "" # i.e. `true` but without "¶"
+      permalink_class: headerlink fa fa-link
+      permalink_title: Link to Heading
+
+
 
 nav:
   - index.md
