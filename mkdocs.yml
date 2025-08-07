@@ -23,8 +23,8 @@ markdown_extensions:
       permalink_title: Link to Heading
 
 
-
 nav:
   - index.md
   - 1day.md
+  - pandas/pandas.md
   - 2day.md
