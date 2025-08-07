@@ -5,14 +5,11 @@ theme:
   highlightjs: true
   #  logo: /imgs/tacc-logo-with-words.svg
 
-
 #extra_css:
 #  - css/extra.css
 
-
 plugins:
   - search
-
 
 markdown_extensions:
   - extra
@@ -25,6 +22,18 @@ markdown_extensions:
 
 nav:
   - index.md
-  - 1day.md
-  - pandas/pandas.md
-  - 2day.md
+  - Day 1: 
+    - Schedule: 1day/schedule.md
+    - Class Introduction: 1day/intro.md
+    - Pandas: 1day/pandas/pandas.md
+  - Day 2:
+    - 2day/schedule.md
+  - Day 3:
+    - 3day/schedule.md
+  - Day 4:
+    - 4day/schedule.md
+  - Day 5:
+    - 5day/schedule.md
+
+
+

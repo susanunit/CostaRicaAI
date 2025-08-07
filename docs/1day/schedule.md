@@ -1,16 +1,4 @@
-# Questions for Charlie - 
-
-* Translators?
-* Zoom?
-* Recordings?
-* what will be most common method of accessing Frontera - TAP?  we don't need to bother with SLURM or any of that right?
-* should they create github accounts?
-* SDL make Charlie an admin and limit pull requests
-
-
-
-# Day 1 Suggested Itinerary
-
+# Day 1 Suggested Schedule
 
 ## Welcome
 
