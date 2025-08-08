@@ -25,6 +25,7 @@ nav:
   - Day 1: 
     - Schedule: 1day/schedule.md
     - Class Introduction: 1day/intro.md
+    - Ecosystem: 1day/ecosystem.md
     - Pandas: 1day/pandas/pandas.md
   - Day 2:
     - 2day/schedule.md

@@ -1,4 +1,4 @@
-# PANDAS 101
+# Introduction to Pandas
 
 ## Pandas, What is it? 
 
