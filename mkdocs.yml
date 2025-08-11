@@ -22,13 +22,14 @@ markdown_extensions:
 
 nav:
   - index.md
-  - Day 1: 
+  - Course Schedule:
     - Schedule: 1day/schedule.md
     - Class Introduction: 1day/intro.md
     - Ecosystem: 1day/ecosystem.md
     - Pandas: 1day/pandas/pandas.md
   - Day 2:
     - 2day/schedule.md
+    - 2day/clustering.md
   - Day 3:
     - 3day/schedule.md
   - Day 4:
