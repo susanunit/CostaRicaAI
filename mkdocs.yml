@@ -28,14 +28,15 @@ nav:
     - Ecosystem: 1day/ecosystem.md
     - Pandas: 1day/pandas/pandas.md
   - Day 2:
-    - 2day/schedule.md
-    - 2day/clustering.md
+    - Schedule: 2day/schedule.md
+    - Classification and Clustering: 2day/clustering.md
+    - Choosing an Algorithm: 2day/choosing.md
   - Day 3:
-    - 3day/schedule.md
+    - Schedule: 3day/schedule.md
   - Day 4:
-    - 4day/schedule.md
+    - Schedule: 4day/schedule.md
   - Day 5:
-    - 5day/schedule.md
+    - Schedule: 5day/schedule.md
 
 
 

@@ -1,5 +1,6 @@
 ## Day 2 Schedule
 
-* [Clustering](clustering.md)
+* [Classification and Clustering](clustering.md)
+* [Choosing the Correct Algorithm](choosing.md)
 
 
