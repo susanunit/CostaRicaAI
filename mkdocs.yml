@@ -33,6 +33,8 @@ nav:
     - Choosing an Algorithm: 2day/choosing.md
   - Day 3:
     - Schedule: 3day/schedule.md
+    - Regression and Forecasting: 3day/featureengineering.md
+    - Feature Engineering: 3day/regression.md
   - Day 4:
     - Schedule: 4day/schedule.md
   - Day 5:
