@@ -9,6 +9,7 @@
 * WhatsApp - what's the best way of communicating with TACC / each other?
 
 
+<!--
 ## Charlie's proposed schedule
 
 ```
@@ -48,6 +49,7 @@ Day 5: Team Projects – Final Presentation
 * Group discussion on techniques used and key takeaways
 * Wrap-up and feedback sessionk
 ```
+-->
 
 ## Course Schedule
 
