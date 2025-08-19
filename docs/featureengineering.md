@@ -1,125 +1,368 @@
 # Feature Engineering
 
-## 1. Hour of Day (Cyclic Encoding)
+## Definition 
 
-**Problem**
+Feature engineering is the process of **transforming raw data into meaningful inputs (features)** that machine learning models can understand.  
 
-* Time of day (0–23) is **cyclical**.
-* 23:00 and 00:00 are *close* in time, but numerically they are far apart.
-* Linear models think 0 and 23 are extremes unless we fix it.
+**Why it matters**
 
-**Solution: Sin/Cos Transform (Cyclic Encoding)**
+* The quality of your features often matters **more than the choice of algorithm**. 
 
-* Imagine mapping the hour onto a **circle (like a clock face)**.
-* Encode as:
+* A well-chosen feature can reveal hidden patterns, making the model smarter and more accurate. 
 
-	* `sin(2π * hour / 24)`
-	* `cos(2π * hour / 24)`
+**Analogy** 
 
-* This transforms **Hour of Day** into coordinates on a circle — making midnight close to 11 PM and 1 AM.
+* Imagine you’re predicting whether a basketball player will score. 
 
-**Example Code**
+  * Raw data might be: *player’s height, team name, jersey number, last game date*. 
 
-```
-import numpy as np
-data['hour'] = data['published_date'].dt.hour
-data['hour_sin'] = np.sin(2 * np.pi * data['hour'] / 24)
-data['hour_cos'] = np.cos(2 * np.pi * data['hour'] / 24)
-```
+  * After feature engineering, useful features might be: *average points per game, shooting percentage in the last 5 games, fatigue level, opponent’s defense rating*. 
 
----
+* Same raw data, but better structured information. 
 
-## 2. Day of Week Encoding
 
-You can represent **Day of the Week** in two ways:
+### Key Types of Feature Engineering
 
-* **One-Hot Encoding** — Create a binary column for each day (Mon, Tue, ..., Sun)
-* **Cyclic Encoding (sin/cos)** — Similar to hour, because Sunday and Monday are adjacent.
+1. **Cleaning** – Fixing missing values, removing duplicates, converting data types. 
 
-**Example Code (One-Hot Encoding):**
+2. **Transformation** – Scaling numbers, normalizing values, encoding categorical data. 
 
-```
-data['day_of_week'] = data['published_date'].dt.dayofweek  # 0=Mon, 6=Sun
-data = pd.get_dummies(data, columns=['day_of_week'])
-```
+3. **Creation** – Making new features from old ones. 
 
-**Cyclic Encoding Alternative:**
+   * **Example**: from “Published Date” you can create “Hour of Day,” “Day of Week,” “Is Weekend.” 
 
-```
-data['day_sin'] = np.sin(2 * np.pi * data['day_of_week'] / 7)  
-data['day_cos'] = np.cos(2 * np.pi * data['day_of_week'] / 7)
-```
+4. **Selection** – Choosing the most important features to avoid noise.
 
----
+"Feature engineering is how we turn messy real-world data into the smart signals that help AI make better predictions. It’s less about magic algorithms and more about asking the right questions of your data."
 
-## 3. Location Grid (Spatial Binning)
+## Feature Engineering Tasks
 
-**Problem:**  Lat/Lon coordinates are precise, but regression models need broader **zones** (Downtown, North, etc.).
+### 1. Datetime Features (from Published Date)
 
-**Solution:**
+| Derived Feature | Purpose |
+| ----- | ----- |
+| Incident Hour (0-23) | Identify time-of-day patterns |
+| Day of Week (0-6) | Capture weekday/weekend behavior |
+| Weekend Flag | Binary flag (1 \= Weekend, 0 \= Weekday) |
 
-* Divide the city map into **grid cells (zones)**.
-* Example: Every 0.01 degrees of lat/lon is a new grid.
-* Count incidents per grid cell.
+### 2. Categorical Encoding
 
-**Example Code:**
+| Feature | Encoding Method | Notes |
+| ----- | ----- | ----- |
+| Issue Reported | One-Hot Encoding or Label Encoding | High cardinality may require frequency encoding |
+| Agency | One-Hot Encoding | Depends on how many unique agencies there are |
 
-```
-data['lat_bin'] = (data['latitude'] * 100).astype(int)
-data['lon_bin'] = (data['longitude'] * 100).astype(int)
-data['grid_id'] = data['lat_bin'].astype(str) + "_" + data['lon_bin'].astype(str)
-```
+### 3. Spatial Features (Latitude/Longitude)
 
-This gives you zones like:
+| Transformation | Purpose |
+| ----- | ----- |
+| Distance from Downtown (30.2672, \-97.7431) | Proximity to city center |
+| Latitude & Longitude Scaling | Normalize for distance-based models |
+| Location Clusters (Optional) | KMeans or DBSCAN clustering on coordinates |
 
-* Grid 3025\_9771 → Downtown
-* Grid 3028\_9773 → North Austin
+### 4. Address Text Feature Engineering (Optional but Valuable)
 
----
+| Transformation | Purpose |
+| ----- | ----- |
+| Extract Street Names | e.g., “E 6th St” |
+| Road Type Flag | e.g., Highway, Service Road, Blvd, etc. |
+| Text Length of Address | Indirect signal for address granularity |
 
-## 4. Incident Type Encoding
+### 5. Feature Scaling
 
-* **One-Hot Encoding:** Create binary columns for each type of incident (Crash, Hazard, etc.).
-* **Count Encoding (for Time Buckets):** Count how many of each type occur in a given hour or zone.
-
-**One-Hot Example:**
-
-`data = pd.get_dummies(data, columns=['issue_reported'])`
+| Feature | Scaling Method |
+| ----- | ----- |
+| Latitude, Longitude, Distance | MinMaxScaler (scale to 0-1) |
+| Time-based Features (if numerical) | StandardScaler (mean 0, std 1\) |
 
 ---
 
-## 5. Lagged Incident Counts
+## Target & ML Goals
 
-**Concept:**
-
-* The number of incidents in the previous hour might influence the current hour.
-* For example: Ongoing hazards might spill over into future hours.
-
-**How to Do It:**
-
-* Aggregate incidents per hour.
-* Shift the incident count by 1 hour to create a “lagged” feature.
-
-**Example Code:**
-
-```
-data['hour_bucket'] = data['published_date'].dt.floor('H')
-hourly_counts = data.groupby('hour_bucket').size().reset_index(name='incident_count')
-hourly_counts['incident_count_lag_1'] = hourly_counts['incident_count'].shift(1)
-```
+| Task | Target Feature | ML Type |
+| ----- | ----- | ----- |
+| **Classification of Incident Type** | Issue Reported | Multiclass Classification |
+| **Cluster Incident Hotspots** | Latitude/Longitude \+ Time | Clustering (KMeans/DBSCAN) |
+| **Bias Detection by Agency** | Agency vs. Incident Types | Clustering/Exploratory Analysis |
 
 ---
 
-## 6. Rolling Averages (Smoothed Trends)
+## Summary of Needed Feature Engineering for Day 2:
 
-**Concept:**
+| Task | Required? | Complexity Level |
+| ----- | ----- | ----- |
+| Datetime Features from Published Date | ✅ | Easy |
+| Encode Issue Reported | ✅ | Moderate |
+| Encode Agency | ✅ | Easy |
+| Lat/Lon Scaling | ✅ | Easy |
+| Distance from Downtown | ✅ | Moderate |
+| Location Clustering | Optional | Moderate |
+| Extract Road Type from Address | Optional | Moderate |
+| Text Features from Address (length) | Optional | Easy |
 
-* Smooth out noise by taking a rolling average of incidents.
-* Example: Average number of incidents in the last 3 hours.
+## Why Engineer Datetime Features from `Published Date`?
 
-**Example Code**
+### Raw Column:
 
-```
-hourly_counts['incident_count_roll3'] = hourly_counts['incident_count'].rolling(window=3).mean()
-```
+| Column Name | Example Value | Problem with Raw Form |
+| ----- | ----- | ----- |
+| Published Date | `2025-08-03 14:30:00` | A raw timestamp is meaningless to ML models |
+
+---
+
+## Transformations & Their Purpose:
+
+### 1. Incident Hour (0-23)
+
+| Purpose | Why it Matters |
+| ----- | ----- |
+| Capture time-of-day patterns | Traffic incidents often peak during rush hours (7-9am, 4-6pm) |
+| Useful for both classification and clustering | Helps models detect temporal patterns linked to specific incident types (e.g., collisions in the morning, hazards at night) |
+
+### 2. Day of Week (0-6)
+
+| Purpose | Why it Matters |
+| ----- | ----- |
+| Identify weekday vs weekend patterns | Traffic behavior changes on weekends; incidents like stalled vehicles or hazards may be more common |
+| Essential for clustering patterns | Groups incidents based on weekly cycles (e.g., Friday rush hour hotspots) |
+
+### 3. Weekend Flag (Binary 0/1)
+
+| Purpose | Why it Matters |
+| ----- | ----- |
+| Simplifies weekday/weekend distinction | For simple models, binary features are often more impactful than categorical day-of-week |
+| Useful in classification | Helps classify incident types likely to occur on weekends (e.g., events, road closures) |
+
+### 4. Time-of-Day as Cyclical Feature (Optional, Advanced)
+
+| Purpose | Why it Matters |
+| ----- | ----- |
+| Encode hour using sine/cosine | Prevents misleading distances between 23:00 and 00:00 in clustering models |
+| Makes models aware of circular time | Important for KMeans/DBSCAN where distance metrics would otherwise treat 23 and 0 as far apart |
+
+---
+
+## High-Level Why:
+
+* **Traffic incidents are inherently temporal.**  
+   Patterns in collisions, hazards, and stalled vehicles **follow time-of-day and day-of-week rhythms**.
+
+* **Machine Learning models don't understand timestamps.**  
+   They need **explicit numerical or categorical features** representing patterns (e.g., rush hours, weekends).
+
+* **For Clustering**, time-of-day and day-of-week help reveal "incident patterns" that are **spatial-temporal**:
+
+  * Where and when do collisions spike?
+
+  * Are stalled vehicles more common on weekends?
+
+* **For Classification**, datetime-derived features add valuable predictive signals:
+
+  * If it’s Friday 5 PM, there’s a higher chance it’s a collision.
+
+  * If it’s Sunday afternoon, it might be a hazard or road closure.
+
+---
+
+** Without Datetime Features:**
+
+| Model Task | Without Datetime Features |
+| ----- | ----- |
+| Classification | Model treats all incidents as temporally equal, losing out on key predictive patterns |
+| Clustering | Incidents occurring at different times but same locations may get grouped incorrectly |
+
+## Why Raw Timestamps are “Meaningless” to ML Models:
+
+### 1. Timestamps Are Not Linear or Numeric in a Useful Way
+
+| Problem | Example |
+| ----- | ----- |
+| Timestamps are large numbers | `2025-08-03 14:30:00` → 1,755,690,600 (UNIX time) |
+| ML models (especially tree-based, linear, distance-based) can't extract useful patterns from such large continuous values |  |
+| The difference between two timestamps isn’t always meaningful | The numeric difference between `2025-08-03 14:00:00` and `14:30:00` is 1800 seconds, but the **semantic difference is "same hour"** |
+
+---
+
+### 2. Timestamps Encode Multiple Dimensions (Time & Date)
+
+| Aspect | Why It's Problematic |
+| ----- | ----- |
+| Day of Week | Not directly encoded—models can’t infer it |
+| Hour of Day | Hidden inside a long number |
+| Weekend vs Weekday | Hidden pattern—models won’t know weekends differ |
+| Recurring Cycles | Timestamps don’t indicate cyclical nature of time |
+
+Models need **explicit signals** like:
+
+* "This happened on a Friday"
+
+* "This occurred at 7 AM"
+
+* "This is during the weekend"
+
+---
+
+### 3. Distance-Based Models Get Confused
+
+| Model Type | Why Raw Timestamps Fail |
+| ----- | ----- |
+| **KNN, KMeans, DBSCAN** | These rely on distances between feature values. A timestamp like `14:30` is just a big number that misrepresents proximity. |
+| Example: | 23:00 (11 PM) and 01:00 (1 AM) are 2 hours apart, but numerically seem “far apart” if we use raw numbers. |
+| Solution | Transform time into **cyclical features** (sin/cos encoding) or separate Hour & Day features. |
+
+---
+
+### 4. Tree-Based Models Waste Splits
+
+| Model Type | Problem |
+| ----- | ----- |
+| Decision Trees, Random Forests | Trees will waste splits trying to make sense of a massive continuous timestamp field |
+| Example: | It might try to split on "timestamps greater than 1700000000" — which is arbitrary and meaningless for incident patterns |
+
+---
+
+## Why Engineers Derive Features (Hour, Day, Weekend, Cyclical)
+
+| Derived Feature | Makes This Explicit to Model |
+| ----- | ----- |
+| **Hour of Day (0-23)** | Helps model see morning/evening patterns |
+| **Day of Week (0-6)** | Models weekly traffic trends |
+| **Weekend Flag (0/1)** | Helps model generalize weekend-specific behaviors |
+| **Cyclical Encoding (sin/cos of Hour)** | Helps distance-based models understand time loops from 23:00 to 00:00 |
+
+## Why We Need to Encode `Issue Reported`
+
+### 1. Raw Text is Not Machine-Understandable
+
+| Problem | Example |
+| ----- | ----- |
+| Raw text strings (e.g., “Crash”, “Hazard”, “Stalled Vehicle”) are not numeric | ML models require numerical representations of features |
+| Models can’t calculate distance, similarity, or make splits on strings | A model can’t “compare” the text “Hazard” with “Collision” directly |
+
+---
+
+### 2. Type of Encoding Depends on Use-Case
+
+| Goal | Suggested Encoding | Why? |
+| ----- | ----- | ----- |
+| **Classification (as Target)** | Leave as raw labels (string) | Scikit-learn classifiers handle string labels as target values |
+| **Classification (as Feature)** | One-Hot Encoding (small cardinality) | Converts each category into a binary column (e.g., “is\_hazard”) |
+|  | Frequency Encoding (large cardinality) | Replaces category with its frequency (good for high-cardinality issues) |
+| **Clustering (as Feature)** | One-Hot Encoding (preferred) | Distance-based clustering needs numerical vectors |
+
+---
+
+### 3. Why One-Hot Encoding is Usually the First Step
+
+| Pros | Cons |
+| ----- | ----- |
+| Simple, explicit binary representation | Increases dimensionality (one column per unique value) |
+| Works well for distance-based models (KMeans, DBSCAN) | Sparse matrix for high cardinality |
+| Ensures no ordinal relationship is assumed |  |
+
+Example:
+
+| Issue Reported | One-Hot Columns |
+| ----- | ----- |
+| Crash | \[1, 0, 0\] |
+| Hazard | \[0, 1, 0\] |
+| Stalled Vehicle | \[0, 0, 1\] |
+
+---
+
+### 4. Alternative: Frequency Encoding (When Issue List is Long)
+
+| Why Consider This? | When to Use |
+| ----- | ----- |
+| Reduces dimensionality (single column) | When “Issue Reported” has high cardinality |
+| Embeds frequency information | E.g., “Hazard” might occur in 40% of data, “Collision” in 30%, etc. |
+
+Example:
+
+| Issue Reported | Frequency Encoded Value |
+| ----- | ----- |
+| Hazard | 0.40 |
+| Collision | 0.30 |
+
+---
+
+### 5. Why Encoding “Issue Reported” is Crucial for Clustering
+
+| Problem | Impact if Unencoded |
+| ----- | ----- |
+| Distance-based algorithms (KMeans, DBSCAN) need numerical features | Without encoding, models can’t differentiate categories |
+| Raw strings make clusters meaningless | Incidents with the same “Issue Reported” value won’t be treated as “close” unless numerically encoded |
+
+---
+
+## High-Level Why:
+
+* ML models **don’t understand text labels as categorical concepts** unless we explicitly transform them.
+
+* **Encoding ‘Issue Reported’** injects semantic meaning into a format ML models can process—allowing them to group similar incidents or predict categories effectively.
+
+* Choosing **One-Hot vs Frequency Encoding** depends on **cardinality** and **model sensitivity to dimensionality**.
+
+## Why We Need to Engineer Spatial Features (Latitude, Longitude)
+
+### 1. Raw Lat/Lon Coordinates Are Just Numbers
+
+| Problem | Example |
+| ----- | ----- |
+| Raw Lat/Lon (e.g., 30.2672, \-97.7431) are treated as independent numerical values | ML models don’t inherently understand geographical proximity |
+| Distance between two Lat/Lon points is **not linear** in (Lat, Lon) space | Small differences in coordinates could represent meters or miles depending on zoom level |
+
+---
+
+### 2. For Clustering: Lat/Lon Must Reflect Real-World Proximity
+
+| Issue | Why It’s a Problem |
+| ----- | ----- |
+| KMeans & DBSCAN rely on **distance metrics (Euclidean, Manhattan, etc.)** | Raw Lat/Lon coordinates do not accurately reflect real-world distances |
+| Latitude/Longitude are on a spherical surface (Earth) | Euclidean distances in (Lat, Lon) space are distorted |
+| Downtown incidents (dense area) will get mixed with outliers if raw coordinates are used | Models fail to group spatial clusters accurately |
+
+---
+
+### 3. Distance Features Provide Better Spatial Context
+
+| Feature | Why It’s Useful |
+| ----- | ----- |
+| **Distance from Downtown (Austin City Center)** | Allows model to understand how far an incident is from a central reference point (e.g., 6th & Congress) |
+| **Distance to nearest known hotspot (Optional)** | Enhances clustering by anchoring around known traffic hubs |
+
+---
+
+### 4. Spatial Clustering Requires Scaling or Transformation
+
+| Method | Why? |
+| ----- | ----- |
+| **Min-Max Scaling Lat/Lon** | Normalizes spatial ranges for clustering algorithms that are sensitive to feature scales |
+| **Haversine Distance (Optional)** | Calculates great-circle distance between two Lat/Lon points—useful for geospatial clustering |
+
+---
+
+### 5. Alternative Approach: Pre-cluster Lat/Lon → Location Group Feature
+
+| What This Does | Why It Helps |
+| ----- | ----- |
+| Use KMeans/DBSCAN to pre-cluster Lat/Lon into spatial groups (e.g., Downtown, East Austin, Suburbs) | Converts continuous Lat/Lon into a **categorical “Location Cluster” feature** |
+| Reduces dimensionality (turns two continuous variables into one categorical group) | Models can learn from location context without dealing with coordinate math |
+
+---
+
+## High-Level Why:
+
+* **Raw Latitude/Longitude values lack context.**  
+   The model doesn’t understand that (30.27, \-97.74) is “Downtown” and (30.30, \-97.70) is “East Austin.”
+
+* **Distance metrics on Lat/Lon are misleading unless scaled or converted to real-world distances.**
+
+* For **Clustering**, spatial features often need:
+
+  * Scaling (Min-Max, Standard)
+
+  * Distance from central reference points (Downtown)
+
+  * Optional: Pre-clustered into categorical “zones”
 

@@ -1,15 +1,17 @@
 # Costa Rica AI Workshop 2025
 
-Carlos Gamboa (cgamboa@cenat.ac.cr)
-Charlie Dey, Texas Advanced Computing Center (charlie@tacc.utexas.edu)
-Susan Lindsey, Texas Advanced Computing Center (slindsey@tacc.utexas.edu)
-
-Class Introduction
-==================
-
-Name of workshop: Workshop Description
+Carlos Gamboa (cgamboa@cenat.ac.cr)  
 August 18-22, 2025  
 Mon-Fri 8:00am - 4:00pm
+
+## Instructors
+
+Charlie Dey, Texas Advanced Computing Center (charlie@tacc.utexas.edu)  
+Susan Lindsey, Texas Advanced Computing Center (slindsey@tacc.utexas.edu)  
+
+
+
+---
 
 * Our Frontera reservation 
 
@@ -23,17 +25,16 @@ Mon-Fri 8:00am - 4:00pm
 
 All students in this workshop are on a temporary "Training" allocation, and will be able to access Frontera until this allocation ends. (Around two weeks?)
 
-Frontera is one of TACC's High Performance Computing (HPC) resources.  If you have aAccess Frontera via
+Frontera is one of TACC's High Performance Computing (HPC) resources.  You may access Frontera via these methods:
 
-	* SSH - secure shell protocal
-	* VSCode
-	* TACC Anlysis Portal  - web interface to most common applications ??? on Frontera
+* SSH - secure shell protocal
+* VSCode
+* TACC Anlysis Portal  - web interface to most common applications ??? on Frontera
 
-## Additional Resources
+## References
 
-* [MFA at TACC](https://docs.tacc.utexas.edu/basics/mfa/)
 * [TACC Account Portal](https://accounts.tacc.utexas.edu/login?redirect_url=profile) - Manage your TACC account and view your allocations
-* [Frontera User Guide](https://docs.tacc.utexas.edu/hpc/frontera/)
 * [TACC Analysis Portal (TAP)](https://tap.tacc.utexas.edu/) 
-* [Costa Rica AI Workshop (this repository)]()
+* [MFA at TACC](https://docs.tacc.utexas.edu/basics/mfa/)
+* [Frontera User Guide](https://docs.tacc.utexas.edu/hpc/frontera/)
 
