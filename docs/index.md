@@ -2,28 +2,26 @@
 
 Carlos Gamboa (cgamboa@cenat.ac.cr)  
 August 18-22, 2025  
-Mon-Fri 8:00am - 4:00pm
+Mon-Fri 8:30am - 4:30pm
 
 ## Instructors
 
 Charlie Dey, Texas Advanced Computing Center (charlie@tacc.utexas.edu)  
 Susan Lindsey, Texas Advanced Computing Center (slindsey@tacc.utexas.edu)  
 
-
-
 ---
 
 * Our Frontera reservation 
 
 	* `frontera.tacc.utexas.edu`
-	* Reservation number: CR-AI-school-mon
+	* Reservation number: CR-AI-school-mon, CR-AI-school-tue
 
 * In order to log into and run jobs on TACC resources you must:
 
 	* have an active TACC User Account
 	* be added to an active project/allocation
 
-All students in this workshop are on a temporary "Training" allocation, and will be able to access Frontera until this allocation ends. (Around two weeks?)
+All students in this workshop are on a temporary "Frontera-Training" allocation, and will be able to access Frontera until this allocation ends. (Around two weeks?)
 
 Frontera is one of TACC's High Performance Computing (HPC) resources.  You may access Frontera via these methods:
 
@@ -35,6 +33,7 @@ Frontera is one of TACC's High Performance Computing (HPC) resources.  You may a
 
 * [TACC Account Portal](https://accounts.tacc.utexas.edu/login?redirect_url=profile) - Manage your TACC account and view your allocations
 * [TACC Analysis Portal (TAP)](https://tap.tacc.utexas.edu/) 
+* [TACC Documentation](http://docs.tacc.utexas.edu)
 * [MFA at TACC](https://docs.tacc.utexas.edu/basics/mfa/)
 * [Frontera User Guide](https://docs.tacc.utexas.edu/hpc/frontera/)
 
