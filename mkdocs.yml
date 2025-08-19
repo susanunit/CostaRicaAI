@@ -1,4 +1,4 @@
-site_name: Costa Rica AI Workshop 2025
+site_name: Costa Rica AI 2025 Workshop 2025
 
 theme:
   name: readthedocs 
@@ -19,8 +19,15 @@ markdown_extensions:
 
 nav:
   - index.md
-  - Welcome to TACC: WelcomeToTACC.pptx
-  - Intro to Data Science: IntroDataScience.pptx
-  - Intro to Pandas: Pandas.pptx
-  - Intro to Matplotlib: Matplotlib.pptx
+  - Welcome to TACC (.pptx download): WelcomeToTACC.pptx
+  - Intro to Data Science (.pptx download): IntroDataScience.pptx
+  - Intro to Pandas (.pptx download): Pandas.pptx
+  - Intro to Matplotlib (.pptx download): Matplotlib.pptx
+
+  - Feature Engineering (notes): featureengineering.md
+  - Feature Engineering (slides): featureengineering.pptx
+ 
+
+
+
 
