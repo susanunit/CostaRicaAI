@@ -2,7 +2,7 @@
 
 Carlos Gamboa (cgamboa@cenat.ac.cr)  
 August 18-22, 2025  
-Mon-Fri 8:30am - 4:30pm
+Mon-Fri 8:30am - 4:00pm
 
 ## Instructors
 
@@ -28,6 +28,19 @@ Frontera is one of TACC's High Performance Computing (HPC) resources.  You may a
 * SSH - secure shell protocal
 * VSCode
 * TACC Anlysis Portal  - web interface to most common applications ??? on Frontera
+
+--
+
+Run these python statements:
+
+```
+df.groupby('IssueReported').size().sort_values(ascending=False).head(10)
+
+df['Date'] = pd.to_datetime(df['Published Date'])
+df['Month'] = df['Date'].dt.month
+monthly_counts = df.groupby('Month').size()
+```
+
 
 ## References
 
