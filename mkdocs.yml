@@ -1,7 +1,7 @@
 site_name: Costa Rica AI Workshop 2025
 
 theme:
-  name: tacc_readthedocs
+  name: readthedocs 
   highlightjs: true
 
 
