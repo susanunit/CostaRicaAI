@@ -19,15 +19,19 @@ markdown_extensions:
 
 nav:
   - index.md
-  - Welcome to TACC (.pptx download): WelcomeToTACC.pptx
-  - Intro to Data Science (.pptx download): IntroDataScience.pptx
-  - Intro to Pandas (.pptx download): Pandas.pptx
-  - Intro to Matplotlib (.pptx download): Matplotlib.pptx
 
-  - Tuesday notes: tuesdaynotes.md
+  - Lunes:
+    - Welcome to TACC (.pptx download): WelcomeToTACC.pptx
+    - Intro to Data Science (.pptx download): IntroDataScience.pptx
+    - Intro to Pandas (.pptx download): Pandas.pptx
 
-  - Feature Engineering (notes): featureengineering.md
-  - Feature Engineering (slides): featureengineering.pptx
+  - Martes:
+    - Tuesday notes: tuesdaynotes.md
+    - Intro to Matplotlib (.pptx download): Matplotlib.pptx
+    - Feature Engineering (notes): featureengineering.md
+    - Feature Engineering (slides): featureengineering.pptx
+
+
  
 
 
