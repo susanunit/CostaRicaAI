@@ -1,68 +1,35 @@
 # Costa Rica AI Workshop 2025
 
-## <font color="red">Questions</font>
+Carlos Gamboa (cgamboa@cenat.ac.cr)
+Charlie Dey (charlie@tacc.utexas.edu)
+Susan Lindsey (slindsey@tacc.utexas.edu)
 
-* Determine recording methods / needs
-* What will be most common method of accessing Frontera - TAP?  web interface?
-* Susan: make Charlie an admin and limit pull requests to admins
-* Slack?  what is our process for fielding questions in class?
-* WhatsApp - what's the best way of communicating with TACC / each other?
+* Our Frontera reservation 
+
+	* `frontera.tacc.utexas.edu`
+	* Reservation number: CR-AI-school-mon
+
+* In order to log into and run jobs on TACC resources
+
+	* have an active TACC User Account
+	* be added to an active project/allocation
+
+This class has been awarded a temp allocation here  - do we have a TAS entry?
 
 
-<!--
-## Charlie's proposed schedule
+In this case, your allocation grants you access to TACC's Frontera supercomputing resouce.  
 
-```
-Day 1: Foundations and Setup
+* Frontera is an HPC resource.  Access Frontera via
 
-* Introduction to the workshop goals and structure
-* Setting up the Python environment (e.g., Jupyter, libraries like scikit-learn, pandas, matplotlib)
-* Introduction to the shared dataset
-* Data cleaning and exploratory data analysis (EDA) techniques
-* Basic visualizations and feature engineering
-
-Day 2: AI Techniques – Classification and Clustering
-
-* Introduction to supervised vs. unsupervised learning
-* Applying classification algorithms (e.g., Decision Trees, KNN, Logistic Regression)
-* Hands-on with clustering (e.g., K-Means, DBSCAN)
-* Discussion on model evaluation and performance metrics
-
-Day 3: AI Techniques – Regression and Forecasting
-
-* Introduction to linear and non-linear regression models
-* Time series analysis and forecasting (e.g., ARIMA, LSTM basics)
-* Applying models to project future trends in the dataset
-* Error analysis and model tuning
-
-Day 4: Team Projects – Dataset Exploration and Analysis
-
-* Form teams and identify datasets of interest (sources: Kaggle, UCI, etc.)
-* Perform data cleaning and EDA
-* Select and apply appropriate AI techniques
-* Begin working on analysis and presentation prep
-
-Day 5: Team Projects – Final Presentation
-
-* Finalize analysis and visualizations
-* Teams present findings, methodology, and insights
-* Group discussion on techniques used and key takeaways
-* Wrap-up and feedback sessionk
-```
--->
-
-## Course Schedule
-
-* [Day 1](1day/schedule.md)
-* [Day 2](2day/schedule.md)
-* [Day 3](3day/schedule.md)
-* [Day 4](4day/schedule.md)
-* [Day 5](5day/schedule.md)
-
+	* SSH - secure shell protocal
+	* VSCode
+	* TACC Anlysis Portal  - web interface to most common applications ??? on Frontera
 
 ## Additional Resources
 
 * [MFA at TACC](https://docs.tacc.utexas.edu/basics/mfa/)
+* [TACC Account Portal](https://accounts.tacc.utexas.edu/login?redirect_url=profile) - Manage your TACC account and view your allocations
+* [Frontera User Guide](https://docs.tacc.utexas.edu/hpc/frontera/)
 * [TACC Analysis Portal (TAP)](https://tap.tacc.utexas.edu/) 
 * [Costa Rica AI Workshop (this repository)]()
 
