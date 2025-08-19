@@ -1,25 +1,29 @@
 # Costa Rica AI Workshop 2025
 
 Carlos Gamboa (cgamboa@cenat.ac.cr)
-Charlie Dey (charlie@tacc.utexas.edu)
-Susan Lindsey (slindsey@tacc.utexas.edu)
+Charlie Dey, Texas Advanced Computing Center (charlie@tacc.utexas.edu)
+Susan Lindsey, Texas Advanced Computing Center (slindsey@tacc.utexas.edu)
+
+Class Introduction
+==================
+
+Name of workshop: Workshop Description
+August 18-22, 2025  
+Mon-Fri 8:00am - 4:00pm
 
 * Our Frontera reservation 
 
 	* `frontera.tacc.utexas.edu`
 	* Reservation number: CR-AI-school-mon
 
-* In order to log into and run jobs on TACC resources
+* In order to log into and run jobs on TACC resources you must:
 
 	* have an active TACC User Account
 	* be added to an active project/allocation
 
-This class has been awarded a temp allocation here  - do we have a TAS entry?
+All students in this workshop are on a temporary "Training" allocation, and will be able to access Frontera until this allocation ends. (Around two weeks?)
 
-
-In this case, your allocation grants you access to TACC's Frontera supercomputing resouce.  
-
-* Frontera is an HPC resource.  Access Frontera via
+Frontera is one of TACC's High Performance Computing (HPC) resources.  If you have aAccess Frontera via
 
 	* SSH - secure shell protocal
 	* VSCode

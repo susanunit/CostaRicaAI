@@ -3,10 +3,7 @@ site_name: Costa Rica AI Workshop 2025
 theme:
   name: tacc_readthedocs
   highlightjs: true
-  #  logo: /imgs/tacc-logo-with-words.svg
 
-#extra_css:
-#  - css/extra.css
 
 plugins:
   - search
