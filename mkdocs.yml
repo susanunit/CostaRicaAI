@@ -1,7 +1,7 @@
 site_name: Costa Rica AI Workshop 2025
 
 theme:
-  name: readthedocs
+  name: tacc_readthedocs
   highlightjs: true
   #  logo: /imgs/tacc-logo-with-words.svg
 
@@ -22,23 +22,8 @@ markdown_extensions:
 
 nav:
   - index.md
-  - Course Schedule:
-    - Schedule: 1day/schedule.md
-    - Class Introduction: 1day/intro.md
-    - Ecosystem: 1day/ecosystem.md
-    - Pandas: 1day/pandas/pandas.md
-  - Day 2:
-    - Schedule: 2day/schedule.md
-    - Classification and Clustering: 2day/clustering.md
-    - Choosing an Algorithm: 2day/choosing.md
-  - Day 3:
-    - Schedule: 3day/schedule.md
-    - Regression and Forecasting: 3day/featureengineering.md
-    - Feature Engineering: 3day/regression.md
-  - Day 4:
-    - Schedule: 4day/schedule.md
-  - Day 5:
-    - Schedule: 5day/schedule.md
-
-
+  - Welcome to TACC: WelcomeToTACC.pptx
+  - Intro to Data Science: IntroDataScience.pptx
+  - Intro to Pandas: Pandas.pptx
+  - Intro to Matplotlib: Matplotlib.pptx
 
