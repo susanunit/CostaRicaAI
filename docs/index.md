@@ -29,17 +29,6 @@ Frontera is one of TACC's High Performance Computing (HPC) resources.  You may a
 * VSCode
 * TACC Anlysis Portal  - web interface to most common applications ??? on Frontera
 
---
-
-Run these python statements:
-
-```
-df.groupby('IssueReported').size().sort_values(ascending=False).head(10)
-
-df['Date'] = pd.to_datetime(df['Published Date'])
-df['Month'] = df['Date'].dt.month
-monthly_counts = df.groupby('Month').size()
-```
 
 
 ## References
