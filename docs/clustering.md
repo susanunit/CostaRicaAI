@@ -1,15 +1,5 @@
 # Clustering
 
-<!-- ## Learning Objectives
-
-By the end of Day 3, students will:
-
-* Understand the difference between supervised and unsupervised learning
-* Implement and explain basic classification (e.g., decision trees) and clustering (e.g., K-means) algorithms
-* Use real-world traffic incident data to solve classification and clustering problems
-* Interpret model outputs and performance metrics
--->
-
 
 
 ## Introduction to Clustering
@@ -23,26 +13,22 @@ Unlike **classification or regression** (supervised learning), clustering doesn'
 In practice, clustering answers the question:   *"Which data points look alike, and how can we group them?"*
 
 
-## **Supervised vs. Unsupervised Learning**
+## Supervised vs. Unsupervised Learning
 
 * **Supervised Learning (Classification, Regression):**
 
   * You give the algorithm **input features** *and* **labels/outputs**.
-
   * The goal is to **predict labels** for new data.
-
   * Example (Traffic Dataset): Predict whether an incident will cause a **lane closure** (yes/no).
 
 * **Unsupervised Learning (Clustering, Dimensionality Reduction):**
 
   * You only give the algorithm **input features** (no labels).
-
   * The goal is to **discover hidden structure** in the data.
-
   * Example (Traffic Dataset): Find **hotspots** of incidents in Austin without knowing them in advance.
 
 
-## **Why Clustering is Useful**
+## Why Clustering is Useful
 
 * Helps make sense of **unlabeled data**.
 * Reveals **patterns** that aren't obvious.
@@ -61,15 +47,13 @@ In practice, clustering answers the question:   *"Which data points look alike, 
 Every clustering algorithm has two main ideas:
 
   1. **Measure similarity** → Often done with distance (Euclidean, Manhattan, cosine similarity).
-
   2. **Group points together** → Close points → same cluster; distant points → different clusters.
 
-Example:  
- If we plot traffic incidents by **latitude & longitude**, nearby points form **geographic clusters** (like downtown Austin vs. I-35 corridor).
+Example:  If we plot traffic incidents by **latitude & longitude**, nearby points form **geographic clusters** (like downtown Austin vs. I-35 corridor).
 
 ---
 
-## **Common Clustering Algorithms**
+## Common Clustering Algorithms
 
 1. **K-Means**
 
@@ -89,26 +73,17 @@ Example:
    * Good for understanding relationships, but slower for large datasets.
 
 
-## **Today's Focus**
+## Today's Focus
 
 * **K-Means:** A simple and widely used method to introduce clustering concepts.
 * **DBSCAN:** A density-based method that's great for finding hotspots and handling outliers.
 
 
-With this intro, students will understand:
-
-* Why clustering matters,
-* How it's different from supervised learning,
-* What real-world questions it can answer (like *“Where do most late-night accidents occur in Austin?”*).
-
-
-**Traffic Example:**
+## Traffic Example:
 
 * We don't know the "true labels" for traffic hotspots.
 * But we can group incidents by **location + time of day** to discover clusters like *downtown congestion*, *highway accidents*, etc.
 
-
-### 2. Load & Prepare the Data
 
 ```
 import pandas as pd
@@ -134,7 +109,7 @@ data['hour'] = data['published_date'].dt.hour
 X = data[['latitude', 'longitude', 'hour']]
 ```
 
-Sidequest:  
+### Sidequest:  
 
 **Why we only used `['latitude', 'longitude', 'hour']` in K-Means**
 
@@ -158,7 +133,7 @@ We dropped the other columns (like incident ID, description, weather, etc.) beca
 * For a first pass, it's easier to keep clustering focused on a **clear interpretation** (location + time).
 
 
-### **When Would We Add More Features?**
+## **When Would We Add More Features?**
 
 We absolutely *can* include more features, but we usually need some **preprocessing/feature engineering**:
 
@@ -176,7 +151,7 @@ We absolutely *can* include more features, but we usually need some **preprocess
   * Can be included directly, but remember to **scale** them (StandardScaler).
 
 
-### Example: Adding "Issue Reported"
+## Example: Adding "Issue Reported"
 
 Suppose we want to cluster not just by **where/when**, but also by **type of incident**.
 
@@ -340,7 +315,6 @@ plt.show()
 
 This map will show **dense hotspots** as clusters, while scattered incidents are marked as noise (`-1`).
 
----
 
 ### 4. Compare K-Means vs DBSCAN
 
@@ -360,9 +334,7 @@ This map will show **dense hotspots** as clusters, while scattered incidents are
    * Larger `eps` → fewer, bigger clusters.
 
 2. **Compare with K-Means:** Cluster only on location (`lat`, `lon`). Which method gives more meaningful groups?
-
 3. **Noise Analysis:** Look at incidents labeled as `-1`. Are these **rare events**? Where do they happen?
-
 4. **Feature Engineering:** Add `is_weekend` or `rush_hour` as features and rerun DBSCAN. Does it detect weekend vs weekday hotspots?
 
 
