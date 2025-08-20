@@ -1,167 +1,371 @@
-Day 2: Classification & Clustering
-==================================
+# Clustering
 
-## 🎯Learning Objectives
+<!-- ## Learning Objectives
 
-By the end of Day 2, students will:
+By the end of Day 3, students will:
 
 * Understand the difference between supervised and unsupervised learning
 * Implement and explain basic classification (e.g., decision trees) and clustering (e.g., K-means) algorithms
 * Use real-world traffic incident data to solve classification and clustering problems
 * Interpret model outputs and performance metrics
-
-
-## 1. Classification
-
-!!! info
-	🔍 What is Classification?
-
-	Classification is the task of predicting a label or category for input data. In our case, we might classify an incident based on its description as a "Crash", "Traffic Hazard", or "Road Closure".
-
-### 💡 Real-Life Analogies
-
-* **Spam filter**: Given the contents of an email, predict whether it's "Spam" or "Not Spam".
-* **Doctor's diagnosis**: Based on symptoms, classify a disease.
-* **Campus security**: Given an incident report, predict if it's high priority.
+-->
 
 
 
-### 🧰 Algorithm Focus: Decision Trees
+## Introduction to Clustering
 
-#### 🛠️ How It Works  
+**What is Clustering?**
 
-A decision tree splits the data based on the features to reduce uncertainty.
-Each split is a "yes/no" question (e.g., Does the incident description contain 'crash'?)
-It continues splitting until it can confidently assign a label.
+**Clustering** is an **unsupervised learning technique** used to group data points that are **similar** to each other.
 
+Unlike **classification or regression** (supervised learning), clustering doesn't require **labels**. Instead, the algorithm looks at the data’s **structure** and tries to discover hidden groupings.
 
-!!! info
-	🧠 **Intuitive Explanation**: Think of playing 20 Questions, where you narrow down the object by asking binary questions. A decision tree is doing exactly that—asking a series of smart questions to guess the right label.
+In practice, clustering answers the question:   *"Which data points look alike, and how can we group them?"*
 
 
-#### 📐 Math Behind It
+## **Supervised vs. Unsupervised Learning**
 
-!!! warning
-	SDL These math formulas are unintelligible and appear to be pasted in from LaTex.  
+* **Supervised Learning (Classification, Regression):**
 
-Entropy (information gain): measures uncertainty. Lower entropy = more confidence.
+  * You give the algorithm **input features** *and* **labels/outputs**.
 
-Entropy(S)=
+  * The goal is to **predict labels** for new data.
 
-	−∑i=1npilog⁡2(pi)\text{Entropy}(S) = -\sum_{i=1}^{n} p_i \log_2(p_i)Entropy(S)=−i=1∑n​pi​log2​(pi​)
+  * Example (Traffic Dataset): Predict whether an incident will cause a **lane closure** (yes/no).
 
-where pip_ipi​ is the proportion of class iii in the current subset.
+* **Unsupervised Learning (Clustering, Dimensionality Reduction):**
+
+  * You only give the algorithm **input features** (no labels).
+
+  * The goal is to **discover hidden structure** in the data.
+
+  * Example (Traffic Dataset): Find **hotspots** of incidents in Austin without knowing them in advance.
 
 
-#### Information Gain:
+## **Why Clustering is Useful**
 
-!!! warning
-	SDL Same - this is unintelligible
+* Helps make sense of **unlabeled data**.
+* Reveals **patterns** that aren't obvious.
+* Can serve as a **preprocessing step** for other ML tasks (e.g., group incidents before running classification).
 
-	IG=Entropy(parent)−∑(samples in splittotal samples⋅Entropy(child))IG = \text{Entropy(parent)} - \sum \left( \frac{\text{samples in split}}{\text{total samples}} \cdot \text{Entropy(child)} \right)IG=Entropy(parent)−∑(total samplessamples in split​⋅Entropy(child))
+* Real-world applications:
 
-The algorithm chooses the feature/split that maximizes information gain.
+  * **Traffic Analysis:** Identify accident-prone intersections or rush-hour clusters.
+  * **Retail:** Group customers by shopping behavior (customer segmentation).
+  * **Healthcare:** Discover subgroups of patients with similar symptoms.
+  * **Astronomy:** Group galaxies or stars based on physical properties.
 
+
+## How Clustering Works (Conceptually)
+
+Every clustering algorithm has two main ideas:
+
+  1. **Measure similarity** → Often done with distance (Euclidean, Manhattan, cosine similarity).
+
+  2. **Group points together** → Close points → same cluster; distant points → different clusters.
+
+Example:  
+ If we plot traffic incidents by **latitude & longitude**, nearby points form **geographic clusters** (like downtown Austin vs. I-35 corridor).
+
+---
+
+## **Common Clustering Algorithms**
+
+1. **K-Means**
+
+   * Partitions data into `k` groups.
+   * Each cluster has a "center" (centroid).
+   * Simple, fast, but assumes round clusters.
+
+2. **DBSCAN (Density-Based Spatial Clustering of Applications with Noise)**
+
+   * Groups dense areas of data.
+   * Automatically detects outliers (noise).
+   * Works well when clusters are irregular shapes.
+
+3. **Hierarchical Clustering**
+
+   * Builds a **tree of clusters** (dendrogram).
+   * Good for understanding relationships, but slower for large datasets.
+
+
+## **Today's Focus**
+
+* **K-Means:** A simple and widely used method to introduce clustering concepts.
+* **DBSCAN:** A density-based method that's great for finding hotspots and handling outliers.
+
+
+With this intro, students will understand:
+
+* Why clustering matters,
+* How it's different from supervised learning,
+* What real-world questions it can answer (like *“Where do most late-night accidents occur in Austin?”*).
+
+
+**Traffic Example:**
+
+* We don't know the "true labels" for traffic hotspots.
+* But we can group incidents by **location + time of day** to discover clusters like *downtown congestion*, *highway accidents*, etc.
+
+
+### 2. Load & Prepare the Data
 
 ```
-Demo Code
-(From earlier, modify slightly to connect to concepts)
-
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
-
-# Features: Bag of words from 'Description'
-X = df['Description']
-y = df['IssueReport']
-vectorizer = CountVectorizer()
-X_vec = vectorizer.fit_transform(X)
-
-X_train, X_test, y_train, y_test = train_test_split(X_vec, y, test_size=0.2)
-
-model = DecisionTreeClassifier(max_depth=5)
-model.fit(X_train, y_train)
-
-# Evaluation
-print(classification_report(y_test, model.predict(X_test)))
-
-# Optional: Visualize the decision tree
+import pandas as pd
 import matplotlib.pyplot as plt
-plt.figure(figsize=(20,10))
-plot_tree(model, filled=True, feature_names=vectorizer.get_feature_names_out(), class_names=model.classes_)
-plt.show()
-```
 
-
-## 2: Clustering
-
-!!! info
-	🔍 What is Clustering?
-	Clustering is the task of grouping data points that are similar without knowing the correct labels in advance.
-
-### 💡 Real-Life Analogies
-
-* **Food delivery zones**: Grouping orders by geography to optimize delivery.
-* **Netflix genres**: Automatically grouping movies that "feel" similar based on user behavior.
-* **Traffic incidents**: Finding geographic or temporal "hotspots" of activity.
-
-
-
-### 🧰 Algorithm Focus: K-Means
-
-#### 🛠️ How It Works
-
-1. Choose K cluster centers randomly.
-1. Assign each data point to the nearest cluster center.
-1. Move each cluster center to the average of its assigned points.
-1. Repeat until assignments don't change (converge).
-
-
-#### 🧠 Intuitive Explanation
-Imagine you're running a food truck business. You want to set up 3 food trucks in Austin to reach as many people as possible. K-Means helps you place them where people naturally cluster—by learning where the traffic is!
-
-###	Math Behind It
-
-**Distance metric**: Typically uses Euclidean distance.
-
- 	d(x,μ)=(x1−μ1)2+(x2−μ2)2+⋯+(xn−μn)2d(x, \mu) = \sqrt{(x_1 - \mu_1)^2 + (x_2 - \mu_2)^2 + \dots + (x_n - \mu_n)^2}d(x,μ)=(x1​−μ1​)2+(x2​−μ2​)2+⋯+(xn​−μn​)2​
-
-
-**Objective**: Minimize the total within-cluster variance:
-
-	∑i=1K∑x∈Ci∥x−μi∥2\sum_{i=1}^{K} \sum_{x \in C_i} \| x - \mu_i \|^2i=1∑K​x∈Ci​∑​∥x−μi​∥2
- where μi\mu_iμi​ is the centroid of cluster CiC_iCi​.
-
-
-
-### 💻 Demo Code
-
-```
 from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 
-coords = df[['Latitude', 'Longitude']].dropna()
+# Load dataset (replace path with actual file)
+df = pd.read_csv("Austin_traffic_incidents.csv")
 
-# Fit KMeans
-kmeans = KMeans(n_clusters=4, random_state=42)
-coords['Cluster'] = kmeans.fit_predict(coords)
+# Preview
+print(df.head())
 
-# Visualize
-plt.scatter(coords['Longitude'], coords['Latitude'], c=coords['Cluster'], cmap='tab10', alpha=0.5)
-plt.xlabel('Longitude')
-plt.ylabel('Latitude')
-plt.title('Traffic Incident Clusters in Austin')
+# Select useful features for clustering
+data = df[['latitude', 'longitude', 'published_date']].dropna()
+
+# Convert published_date to hour of day (feature engineering)
+data['published_date'] = pd.to_datetime(data['published_date'])
+data['hour'] = data['published_date'].dt.hour
+
+# Keep only features for clustering
+X = data[['latitude', 'longitude', 'hour']]
+```
+
+Sidequest:  
+
+**Why we only used `['latitude', 'longitude', 'hour']` in K-Means**
+
+Clustering algorithms (like K-Means) look for **similarities across the features you feed in**. So the choice of features is crucial.
+
+In the example:
+
+`X = data[['latitude', 'longitude', 'hour']]`
+
+we used only **latitude, longitude, and time of day** because:
+
+* **Latitude & Longitude** give us **spatial patterns** (geographic hotspots).
+* **Hour** adds a **temporal dimension** (rush-hour vs late-night clusters).
+
+We dropped the other columns (like incident ID, description, weather, etc.) because:
+
+* Many of them are **categorical or text-based** (e.g., `issue_reported` = "Crash", "Hazard", "Stalled Vehicle"). K-Means doesn't handle categorical/text data directly.
+
+* Including irrelevant or noisy features can **distort the clustering**. For example, if we added a random ID number, the algorithm might cluster based on that meaningless difference.
+
+* For a first pass, it's easier to keep clustering focused on a **clear interpretation** (location + time).
+
+
+### **When Would We Add More Features?**
+
+We absolutely *can* include more features, but we usually need some **preprocessing/feature engineering**:
+
+* **Categorical Features** (e.g., `issue_reported`):
+
+  * Use **one-hot encoding** (`pd.get_dummies`) so categories become numeric.
+  * Example: Crash → [1,0,0], Hazard → [0,1,0], etc.
+
+* **Text Columns** (e.g., descriptions):
+
+  * Use **TF-IDF vectorization** or embeddings.
+
+* **Numeric Features** (e.g., duration, severity):
+
+  * Can be included directly, but remember to **scale** them (StandardScaler).
+
+
+### Example: Adding "Issue Reported"
+
+Suppose we want to cluster not just by **where/when**, but also by **type of incident**.
+
+```
+# One-hot encode categorical feature
+incident_type = pd.get_dummies(df['issue_reported'], prefix='issue')
+
+# Combine with lat/lon/hour
+X = pd.concat([data[['latitude', 'longitude', 'hour']], incident_type], axis=1)
+
+# Scale everything
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+
+X_scaled = scaler.fit_transform(X)
+```
+
+Now the clustering will group incidents not only by *where/when* they happened, but also by *what kind of incident* they were.
+
+
+Key Point: Clustering is only as good as the **features you choose**.
+
+* Too few features → oversimplified clusters.
+* Too many irrelevant features → noisy, meaningless clusters.
+* Smart **feature engineering** → insightful, actionable clusters.
+
+
+### 3. Feature Scaling
+
+Clustering is sensitive to **feature scales** (lat/lon vs hours), so we standardize.
+
+`scaler = StandardScaler()`
+
+`X_scaled = scaler.fit_transform(X)`
+
+
+### 4. Run K-Means Clustering
+
+```
+# Choose number of clusters (k)
+k = 5`
+kmeans = KMeans(n_clusters=k, random_state=42)
+clusters = kmeans.fit_predict(X_scaled)
+
+# Add cluster labels to data
+data['cluster'] = clusters
+```
+
+---
+
+### 5. Visualize Clusters
+
+We'll plot clusters on a **map-like scatter** (latitutde vs. longitude), colored by cluster.
+
+```
+plt.figure(figsize=(10,6))
+plt.scatter(data['longitude'], data['latitude'], c=data['cluster'], cmap='tab10', s=10)
+plt.xlabel("Longitude")
+plt.ylabel("Latitude")
+plt.title("Traffic Incident Clusters in Austin")
 plt.show()
 ```
 
+---
 
-## 🔁 Wrap-Up Exercise Ideas
+### 6. Elbow Method (Optional, but Great Teaching Point)
 
-* **Classification Challenge**: Classify whether a traffic report is a "Crash" or not based on its description.
+To pick the right `k`, we test different values.
 
-* **Clustering Challenge**: Try different values of k and see how cluster shapes change; add day of week to see if time-based clusters emerge.
+```
+inertia = []
 
-* **Discussion Prompt**: When would classification be inappropriate? When would clustering fail?
+for k in range(2, 11):
+    kmeans = KMeans(n_clusters=k, random_state=42)
+    kmeans.fit(X_scaled)
+    inertia.append(kmeans.inertia_)
+
+plt.plot(range(2, 11), inertia, marker='o')
+plt.xlabel("Number of Clusters (k)")
+plt.ylabel("Inertia (Within-cluster Sum of Squares)")
+plt.title("Elbow Method for Optimal k")
+plt.show()
+```
+
+---
+
+### 7. Mini-Challenges for Students
+
+1. **Hotspot Clusters**: Cluster only by `latitude` and `longitude`. Where are the biggest clusters of accidents?
+2. **Time-based Clusters**: Cluster only by `hour`. What patterns do you see (rush-hour vs late night)?
+3. **Feature Engineering Experiment**: Add a new feature: `is_weekend`. Does clustering look different?
+4. **Compare k=3 vs k=8**: How does changing cluster size affect results?
+
+---
+
+### 8. Wrap-Up
+
+* **Clustering is exploratory**: There's no “accuracy” metric like classification, instead we look for *insightful groupings*.
+* **Austin Traffic Example**: Helps identify geographic \+ temporal hotspots, useful for **urban planning** or **resource allocation**.
+
+
+## DBSCAN with Austin Traffic Dataset
+
+### 1. Import & Prepare Data
+
+We'll reuse the dataset from the K-Means section.
+
+```
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import DBSCAN
+
+# Load dataset (replace with actual filename)
+df = pd.read_csv("Austin_traffic_incidents.csv")
+
+# Select location + time features
+data = df[['latitude', 'longitude', 'published_date']].dropna()
+
+# Convert date → hour of day
+data['published_date'] = pd.to_datetime(data['published_date'])
+data['hour'] = data['published_date'].dt.hour
+
+# Features for clustering
+X = data[['latitude', 'longitude', 'hour']]
+
+# Scale features
+scaler = StandardScaler()
+
+X_scaled = scaler.fit_transform(X)
+```
+
+---
+
+### 2. Run DBSCAN
+
+```
+# eps = neighborhood size, min_samples = points to form a dense cluster
+dbscan = DBSCAN(eps=0.5, min_samples=10)
+clusters = dbscan.fit_predict(X_scaled)
+
+# Add results to dataframe
+data['cluster'] = clusters
+```
+
+**cluster = -1** means the point was labeled as **noise/outlier**.
+
+---
+
+### 3. Visualize Clusters
+
+```
+plt.figure(figsize=(10,6))
+plt.scatter(data['longitude'], data['latitude'], c=data['cluster'], cmap='tab10', s=10)
+plt.xlabel("Longitude")
+plt.ylabel("Latitude")
+plt.title("DBSCAN Clustering of Traffic Incidents in Austin")
+plt.show()
+```
+
+This map will show **dense hotspots** as clusters, while scattered incidents are marked as noise (`-1`).
+
+---
+
+### 4. Compare K-Means vs DBSCAN
+
+* **K-Means**: Always forces `k` clusters, even if data doesn't naturally group.
+* **DBSCAN**: Finds clusters of arbitrary shapes, filters out noise.
+* **Traffic Use Case:**
+
+  * K-Means: Good for broad “region-based” grouping.
+  * DBSCAN: Good for detecting **true hotspots** of high density (e.g., one dangerous intersection).
+
+
+### 5. Mini-Challenges for Students
+
+1. **Parameter Tuning:** Change `eps` (radius of neighborhood) and `min_samples`. How do clusters change?
+
+   * Hint: Smaller `eps` → more noise, more small clusters.
+   * Larger `eps` → fewer, bigger clusters.
+
+2. **Compare with K-Means:** Cluster only on location (`lat`, `lon`). Which method gives more meaningful groups?
+
+3. **Noise Analysis:** Look at incidents labeled as `-1`. Are these **rare events**? Where do they happen?
+
+4. **Feature Engineering:** Add `is_weekend` or `rush_hour` as features and rerun DBSCAN. Does it detect weekend vs weekday hotspots?
+
+
+
 
 
