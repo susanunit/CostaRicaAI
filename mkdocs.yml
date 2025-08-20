@@ -26,13 +26,15 @@ nav:
     - Intro to Pandas (.pptx download): Pandas.pptx
 
   - Martes:
-    - Tuesday notes: tuesdaynotes.md
+    - Notas del Martes: tuesdaynotes.md
     - Intro to Matplotlib (.pptx download): Matplotlib.pptx
     - Feature Engineering (notes): featureengineering.md
-    - Feature Engineering (slides): featureengineering.pptx
+    - Feature Engineering (.pptx download): featureengineering.pptx
 
   - Miercoles:
-    - Classification: classification.md
+    - Notas del Miercoles: wednesdaynotes.md
+    - Classification (notes): classification.md
+    - Classification and Clustering (.pptx download): ClassificationClustering.pptx
       
 
 
