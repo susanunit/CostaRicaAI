@@ -175,9 +175,10 @@ Key Point: Clustering is only as good as the **features you choose**.
 
 Clustering is sensitive to **feature scales** (lat/lon vs hours), so we standardize.
 
-`scaler = StandardScaler()`
-
-`X_scaled = scaler.fit_transform(X)`
+```
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+```
 
 
 ### Run K-Means Clustering
