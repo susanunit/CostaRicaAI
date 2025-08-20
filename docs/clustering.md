@@ -1,10 +1,6 @@
 # Clustering
 
-
-
-## Introduction to Clustering
-
-**What is Clustering?**
+## What is Clustering?
 
 **Clustering** is an **unsupervised learning technique** used to group data points that are **similar** to each other.
 
@@ -13,7 +9,7 @@ Unlike **classification or regression** (supervised learning), clustering doesn'
 In practice, clustering answers the question:   *"Which data points look alike, and how can we group them?"*
 
 
-## Supervised vs. Unsupervised Learning
+### Supervised vs. Unsupervised Learning
 
 * **Supervised Learning (Classification, Regression):**
 
@@ -28,7 +24,7 @@ In practice, clustering answers the question:   *"Which data points look alike, 
   * Example (Traffic Dataset): Find **hotspots** of incidents in Austin without knowing them in advance.
 
 
-## Why Clustering is Useful
+### Why Clustering is Useful
 
 * Helps make sense of **unlabeled data**.
 * Reveals **patterns** that aren't obvious.
@@ -42,7 +38,7 @@ In practice, clustering answers the question:   *"Which data points look alike, 
   * **Astronomy:** Group galaxies or stars based on physical properties.
 
 
-## How Clustering Works (Conceptually)
+### How Clustering Works (Conceptually)
 
 Every clustering algorithm has two main ideas:
 
@@ -79,7 +75,7 @@ Example:  If we plot traffic incidents by **latitude & longitude**, nearby point
 * **DBSCAN:** A density-based method that's great for finding hotspots and handling outliers.
 
 
-## Traffic Example:
+## Traffic Example
 
 * We don't know the "true labels" for traffic hotspots.
 * But we can group incidents by **location + time of day** to discover clusters like *downtown congestion*, *highway accidents*, etc.
@@ -109,17 +105,13 @@ data['hour'] = data['published_date'].dt.hour
 X = data[['latitude', 'longitude', 'hour']]
 ```
 
-### Sidequest:  
+### Sidequest  
 
 **Why we only used `['latitude', 'longitude', 'hour']` in K-Means**
 
 Clustering algorithms (like K-Means) look for **similarities across the features you feed in**. So the choice of features is crucial.
 
-In the example:
-
-`X = data[['latitude', 'longitude', 'hour']]`
-
-we used only **latitude, longitude, and time of day** because:
+In the example `X = data[['latitude', 'longitude', 'hour']]`,  we used only **latitude, longitude, and time of day** becaus
 
 * **Latitude & Longitude** give us **spatial patterns** (geographic hotspots).
 * **Hour** adds a **temporal dimension** (rush-hour vs late-night clusters).
@@ -179,7 +171,7 @@ Key Point: Clustering is only as good as the **features you choose**.
 * Smart **feature engineering** → insightful, actionable clusters.
 
 
-### 3. Feature Scaling
+### Feature Scaling
 
 Clustering is sensitive to **feature scales** (lat/lon vs hours), so we standardize.
 
@@ -188,7 +180,7 @@ Clustering is sensitive to **feature scales** (lat/lon vs hours), so we standard
 `X_scaled = scaler.fit_transform(X)`
 
 
-### 4. Run K-Means Clustering
+### Run K-Means Clustering
 
 ```
 # Choose number of clusters (k)
@@ -202,7 +194,7 @@ data['cluster'] = clusters
 
 ---
 
-### 5. Visualize Clusters
+### Visualize Clusters
 
 We'll plot clusters on a **map-like scatter** (latitutde vs. longitude), colored by cluster.
 
@@ -217,7 +209,7 @@ plt.show()
 
 ---
 
-### 6. Elbow Method (Optional, but Great Teaching Point)
+### Elbow Method (Optional)
 
 To pick the right `k`, we test different values.
 
@@ -238,7 +230,7 @@ plt.show()
 
 ---
 
-### 7. Mini-Challenges for Students
+### Mini-Challenges for Students
 
 1. **Hotspot Clusters**: Cluster only by `latitude` and `longitude`. Where are the biggest clusters of accidents?
 2. **Time-based Clusters**: Cluster only by `hour`. What patterns do you see (rush-hour vs late night)?
@@ -247,7 +239,7 @@ plt.show()
 
 ---
 
-### 8. Wrap-Up
+### Wrap-Up
 
 * **Clustering is exploratory**: There's no “accuracy” metric like classification, instead we look for *insightful groupings*.
 * **Austin Traffic Example**: Helps identify geographic \+ temporal hotspots, useful for **urban planning** or **resource allocation**.
