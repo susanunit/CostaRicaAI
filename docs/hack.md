@@ -1,5 +1,7 @@
 # It's Hack Time!
 
+## Day 1
+
 Plan of action for today:
 
 * Team Name
@@ -12,4 +14,12 @@ Find A Dataset
 * Questions you'd like to ask your data
 * Features you data will need
 
+## Day 2
+
+Prepare 4 slides
+
+* Slide 1 - Introduce your Team: Team Members, Team Name, Team Spirit Character
+* Slide 2 - Your Dataset - why you picked your dataset
+* Slide 3 - Your questions you're going to ask, the features you will need
+* Slide 4 - The algorithm you will be using.
 

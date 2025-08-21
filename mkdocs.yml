@@ -36,17 +36,13 @@ nav:
     - Classification (notes): classification.md
     - Clustering (notes): clustering.md
     - Classification and Clustering (.pptx download): ClassificationClustering.pptx
-
     - Choosing the Right Algorithm: choosing.md
-    - It's Hack Time: hack.md
-      
+
   - Jueves:
     - Recommended Data Set Sizes by Model Type: datasetsizes.md
     - Notes del Jueves: thursdaynotes.md
     - Regression and Forecasting (.pptx download): RegressionForecasting.pptx
 
- 
 
-
-
-
+  - Hack Time:
+    - It's Hack Time: hack.md
