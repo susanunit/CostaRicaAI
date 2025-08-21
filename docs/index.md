@@ -14,7 +14,13 @@ Susan Lindsey, Texas Advanced Computing Center (slindsey@tacc.utexas.edu)
 * Our Frontera reservation 
 
 	* `frontera.tacc.utexas.edu`
-	* Reservation number: CR-AI-school-mon, CR-AI-school-tue, CR-AI-school-wed, CR-AI-school-thu, CR-AI-school-fri 
+	* Reservation numbers: 
+
+		* CR-AI-school-mon
+		* CR-AI-school-tue
+		* CR-AI-school-wed
+		* CR-AI-school-thu
+		* CR-AI-school-fri 
 
 * In order to log into and run jobs on TACC resources you must:
 
