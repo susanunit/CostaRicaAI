@@ -23,3 +23,6 @@ Prepare 4 slides
 * Slide 3 - Your questions you're going to ask, the features you will need
 * Slide 4 - The algorithm you will be using.
 
+Place your slides in a folder in the Google Docs Directory here: 
+
+<https://drive.google.com/drive/folders/1VjGW3Xi5MvYn1D98sVY0Lzz3Fl2arVrI>
