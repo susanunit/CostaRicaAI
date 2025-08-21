@@ -24,3 +24,13 @@ plt.xlim(-97.8, -97.65)   # Rango en eje X (Longitude)
 plt.ylim(30.1, 30.5)     # Rango en eje Y (Latitude)
 plt.show()
 ```
+
+## Another look at Austin Traffic Data
+
+Code courtesy of Yassir Jimenez Carballo.
+
+![](austintraffic.png)
+
+[Python Notebook](austintrafficclassification.ipynb)
+
+
