@@ -14,7 +14,17 @@ Susan Lindsey, Texas Advanced Computing Center
 
 ---
 
-* Our Frontera reservation 
+All students in this workshop are on a temporary "Frontera-Training" allocation.  Your TACC accounts will exist for all time, but you will only have access to Frontera till about one week after the workshop ends.
+
+---
+
+Frontera is one of TACC's High Performance Computing (HPC) resources.  You can access Frontera via these methods:
+
+* SSH - Secure Shell Protocal
+* VSCode
+* TACC Anlysis Portal  - web interface to common applications on Frontera
+
+* Our Frontera reservation for the workshop.
 
 	* `frontera.tacc.utexas.edu`
 	* Reservation numbers: 
@@ -29,15 +39,6 @@ Susan Lindsey, Texas Advanced Computing Center
 
 	* have an active TACC User Account
 	* be added to an active project/allocation
-
-All students in this workshop are on a temporary "Frontera-Training" allocation, and will be able to access Frontera until this allocation ends, (about two weeks).
-
-Frontera is one of TACC's High Performance Computing (HPC) resources.  You can access Frontera via these methods:
-
-* SSH - Secure Shell Protocal
-* VSCode
-* TACC Anlysis Portal  - web interface to common applications on Frontera
-
 
 
 ## References
