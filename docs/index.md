@@ -14,7 +14,12 @@ Susan Lindsey, Texas Advanced Computing Center
 
 ![](instructors.jpg)
 
----
+## Course Evaluation
+
+We appreciate all feedback on this course.  Please help us out and fill out this course evaluation:   
+<https://forms.office.com/r/6W106ykMhG?origin=lprLink>.
+
+## TACC Account Information
 
 All students in this workshop are on a temporary "Frontera-Training" allocation.  Your TACC accounts will exist for all time, but you will only have access to Frontera till about one week after the workshop ends.
 
@@ -43,11 +48,6 @@ Frontera is one of TACC's High Performance Computing (HPC) resources.  You can a
 	* be added to an active project/allocation
 
 ---
-
-## Course Evaluation
-
-We appreciate all feedback on this course.  Please help us out and fill out this course evaluation:   
-<https://forms.office.com/r/6W106ykMhG?origin=lprLink>.
 
 
 ## References
