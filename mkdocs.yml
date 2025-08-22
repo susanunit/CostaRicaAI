@@ -20,6 +20,22 @@ markdown_extensions:
 nav:
   - index.md
 
+  - Hack Time:
+    - It's Hack Time: hack.md
+    - Projects:
+      - projects/antteam/antteam.md
+      - projects/biofusion/biofusion.md
+      - projects/breadstreetboys/breadstreetboys.md
+      - projects/datadivers/datadivers.md
+      - projects/emotionai/emotionai.md
+      - projects/entropy/entropy.md
+      - projects/goldbugs/goldbugs.md
+      - projects/losdeatras/losdeatras.md
+      - projects/mnist/mnist.md
+      - projects/starmappers/starmappers.md
+
+
+
   - Lunes:
     - Welcome to TACC (.pptx download): WelcomeToTACC.pptx
     - Intro to Data Science (.pptx download): IntroDataScience.pptx
@@ -43,6 +59,3 @@ nav:
     - Notes del Jueves: thursdaynotes.md
     - Regression and Forecasting (.pptx download): RegressionForecasting.pptx
 
-
-  - Hack Time:
-    - It's Hack Time: hack.md
