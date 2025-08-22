@@ -6,8 +6,11 @@ Mon-Fri 8:30am - 4:00pm
 
 ## Instructors
 
-Charlie Dey, Texas Advanced Computing Center (charlie@tacc.utexas.edu)  
-Susan Lindsey, Texas Advanced Computing Center (slindsey@tacc.utexas.edu)  
+Charlie Dey, Texas Advanced Computing Center   
+<charlie@tacc.utexas.edu>   
+
+Susan Lindsey, Texas Advanced Computing Center   
+<slindsey@tacc.utexas.edu>
 
 ---
 
