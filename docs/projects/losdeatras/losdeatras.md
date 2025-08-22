@@ -1,6 +1,6 @@
-# Los de Atras Team
+# Los de Atrás Team
 
-**The Los de Atras Team is examining banana quality.**
+**The Los de Atrás Team está examinando la calidad de bananas.**
 
 ![](losdeatras-slide.png)  
 

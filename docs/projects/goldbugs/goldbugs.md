@@ -1,4 +1,4 @@
-# Gold BugsTeam
+# Gold Bugs Team
 
 The Gold Bugs Team is studying Sleep Deprivation.
 

@@ -12,6 +12,8 @@ Charlie Dey, Texas Advanced Computing Center
 Susan Lindsey, Texas Advanced Computing Center   
 <slindsey@tacc.utexas.edu>
 
+![](instructors.jpg)
+
 ---
 
 All students in this workshop are on a temporary "Frontera-Training" allocation.  Your TACC accounts will exist for all time, but you will only have access to Frontera till about one week after the workshop ends.
@@ -48,4 +50,5 @@ Frontera is one of TACC's High Performance Computing (HPC) resources.  You can a
 * [TACC Analysis Portal (TAP)](https://tap.tacc.utexas.edu/) 
 * [Frontera User Guide](https://docs.tacc.utexas.edu/hpc/frontera/)
 * [Multi-Factor Authentication at TACC](https://docs.tacc.utexas.edu/basics/mfa/)
+
 
