@@ -1,6 +1,6 @@
 # BioFusion Team
 
-BioFusion Team is studying Football Market Trends
+The BioFusion Team está estudiando studying Fantasy Football Market Trends.
 
 ![](biofusion-slide.png)  
 
