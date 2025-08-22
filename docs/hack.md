@@ -29,6 +29,6 @@ Place your slides in a folder in the Google Docs Directory here:
 
 ## Day 3
 
-Put your final presentations here:
+Put your final presentations and song selections here:
 
 <https://drive.google.com/drive/folders/17w91AH7rW7DZUjpU58AvFjC8HP1Z6kCN>
