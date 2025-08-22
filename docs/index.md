@@ -42,6 +42,13 @@ Frontera is one of TACC's High Performance Computing (HPC) resources.  You can a
 	* have an active TACC User Account
 	* be added to an active project/allocation
 
+---
+
+## Course Evaluation
+
+We appreciate all feedback on this course.  Please help us out and fill out this course evaluation:   
+<https://forms.office.com/r/6W106ykMhG?origin=lprLink>.
+
 
 ## References
 
